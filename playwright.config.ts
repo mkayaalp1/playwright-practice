@@ -4,7 +4,7 @@ const useSlowMo = false; // Toggle slowMo for local debug use
 
 export default defineConfig({
   retries: 1,
-    testDir: './test',
+  testDir: './test',
   projects: [
     {
       name: 'chromium',

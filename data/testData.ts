@@ -1,0 +1,18 @@
+export const testData = {
+    name: 'Spongebob Squarepants',
+    email: 'spongebob.squarepants@test.com',
+    genderSelector: '#id_gender1',
+    password: 'test1234!',
+    day: '4',
+    month: '4',
+    year: '1994',
+    firstName: 'Spongebob',
+    lastName: 'Squarepants',
+    company: 'Krusty Krab',
+    address: '1234 Pineapple Blvd',
+    country: 'Australia',
+    city: 'Bikini Bottom',
+    state: 'Pacific Ocean',
+    zipcode: '48150',
+    mobileNumber: '8005551234',
+}

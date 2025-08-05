@@ -1,40 +1,21 @@
-import { test, expect } from '@playwright/test';
+import { test} from '@playwright/test';
+import { RegistrationPage } from '../pages/RegistrationPage.ts';
+import { testData } from '../data/testData';
 
 test('Account creation and deletion', async ({ page }) => {
-  await page.goto('https://automationexercise.com/');
-  await page.getByRole('link', { name: ' Signup / Login' }).click();
-  await page.getByRole('textbox', { name: 'Name' }).click();
-  await page.getByRole('textbox', { name: 'Name' }).fill('Spongebob Squarepants');
-  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').click();
-  await page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill('spongebob.squarepants@test.com');
-  await page.getByRole('button', { name: 'Signup' }).click();
-  await page.getByRole('radio', { name: 'Mr.' }).check();
-  await page.getByRole('textbox', { name: 'Password *' }).click();
-  await page.getByRole('textbox', { name: 'Password *' }).fill('Test1234!');
-  await page.locator('#days').selectOption('4');
-  await page.locator('#months').selectOption('4');
-  await page.locator('#years').selectOption('1994');
-  await page.getByRole('checkbox', { name: 'Sign up for our newsletter!' }).check();
-  await page.getByRole('textbox', { name: 'First name *' }).click();
-  await page.getByRole('textbox', { name: 'First name *' }).fill('Spongebob');
-  await page.getByRole('textbox', { name: 'Last name *' }).click();
-  await page.getByRole('textbox', { name: 'Last name *' }).fill('Squarepants');
-  await page.getByRole('textbox', { name: 'Company', exact: true }).click();
-  await page.getByRole('textbox', { name: 'Company', exact: true }).fill('Krusty Krab');
-  await page.getByRole('textbox', { name: 'Address * (Street address, P.' }).click();
-  await page.getByRole('textbox', { name: 'Address * (Street address, P.' }).fill('1234 Pineapple Blvd');
-  await page.getByLabel('Country *').selectOption('Australia');
-  await page.getByRole('textbox', { name: 'City * Zipcode *' }).click();
-  await page.getByRole('textbox', { name: 'City * Zipcode *' }).fill('Bikini Bottom');
-  await page.getByRole('textbox', { name: 'State *' }).click();
-  await page.getByRole('textbox', { name: 'State *' }).fill('Pacific Ocean');
-  await page.locator('#zipcode').click();
-  await page.locator('#zipcode').fill('48150');
-  await page.getByRole('textbox', { name: 'Mobile Number *' }).click();
-  await page.getByRole('textbox', { name: 'Mobile Number *' }).fill('8005551234');
+
+  //use registration page
+  const registrationPage = new RegistrationPage(page);
+  await registrationPage.goToHomePage();
+  await registrationPage.clickSignupLogin();
+  await registrationPage.fillRegistrationForm(testData);
+
+  //Click on Create Account button
   await page.getByRole('button', { name: 'Create Account' }).click();
   await page.getByText('Account Created!').click();
   await page.screenshot({ path: 'test screenshots/accountCreated.png' });
+
+  //Continue and delete account
   await page.getByRole('link', { name: 'Continue' }).click();
   await page.getByRole('link', { name: ' Delete Account' }).click();
   await page.getByText('Account Deleted!').click();
