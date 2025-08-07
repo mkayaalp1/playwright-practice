@@ -36,6 +36,7 @@ async fillRegistrationForm(user: any) {
   await this.page.locator('#days').selectOption(user.day);
   await this.page.locator('#months').selectOption(user.month);
   await this.page.locator('#years').selectOption(user.year);
+  await this.page.screenshot({ path: 'test screenshots/userDOB.png' });
 
   //Check the newsletter checkbox
   await this.page.getByRole('checkbox', { name: 'Sign up for our newsletter!' }).check();
@@ -54,13 +55,13 @@ async fillRegistrationForm(user: any) {
   await this.page.getByRole('textbox', { name: 'Address * (Street address, P.' }).click();
   await this.page.getByRole('textbox', { name: 'Address * (Street address, P.' }).fill(user.address);
   await this.page.getByLabel('Country *').selectOption(user.country);
+  await this.page.getByRole('textbox', { name: 'State' }).click();
+  await this.page.getByRole('textbox', { name: 'State' }).fill(user.state);
   await this.page.getByRole('textbox', { name: 'City * Zipcode *' }).click();
   await this.page.getByRole('textbox', { name: 'City * Zipcode *' }).fill(user.city);
-  await this.page.getByRole('textbox', { name: 'State *' }).click();
-  await this.page.getByRole('textbox', { name: 'State *' }).fill(user.state);
   await this.page.locator('#zipcode').click();
   await this.page.locator('#zipcode').fill(user.zipcode);
-  await this.page.getByRole('textbox', { name: 'Mobile Number *' }).click();
-  await this.page.getByRole('textbox', { name: 'Mobile Number *' }).fill(user.mobileNumber);
+  await this.page.getByRole('textbox', { name: 'Mobile Number' }).click();
+  await this.page.getByRole('textbox', { name: 'Mobile Number' }).fill(user.mobileNumber);
 }
 }

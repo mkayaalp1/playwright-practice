@@ -1,0 +1,18 @@
+{
+  "name": "Chelsie Wiegand",
+  "firstName": "Chelsie",
+  "lastName": "Wiegand",
+  "email": "chelsie.wiegand@qa-test.com",
+  "genderSelector": "#id_gender1",
+  "password": "test1234!",
+  "day": "14",
+  "month": "August",
+  "year": "1958",
+  "company": "O'Keefe Inc",
+  "address": "931 Sibyl Summit",
+  "country": "Australia",
+  "city": "Hermannfurt",
+  "state": "Texas",
+  "zipcode": "81373",
+  "mobileNumber": "463-522-6255 x76902"
+}

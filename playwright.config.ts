@@ -3,8 +3,9 @@ import { defineConfig } from '@playwright/test';
 const useSlowMo = false; // Toggle slowMo for local debug use
 
 export default defineConfig({
-  retries: 1,
+  retries: 0,
   testDir: './test',
+  workers: 1, // Set to 1 for sequential execution
   projects: [
     {
       name: 'chromium',
