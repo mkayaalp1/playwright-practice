@@ -16,6 +16,7 @@ test('Account creation', async ({ page }) => {
 
   //Click on Create Account button
   await page.getByRole('button', { name: 'Create Account' }).click();
+  
   await page.getByText('Account Created!').click();
   await page.screenshot({ path: 'test screenshots/accountCreated.png' });
 

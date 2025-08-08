@@ -26,7 +26,7 @@ async fillRegistrationForm(user: any) {
   await this.page.getByRole('button', { name: 'Signup' }).click();
 
   //Toggle radio button for title
-  await this.page.getByRole('radio', { name: 'Mr.' }).check();
+  await this.page.locator(user.genderSelector).check();
 
   //Enter password
   await this.page.getByRole('textbox', { name: 'Password *' }).click();

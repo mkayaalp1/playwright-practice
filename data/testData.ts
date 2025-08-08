@@ -5,15 +5,21 @@ const CountryOptions = [
     'United States',
     'Canada',
     'Australia',
-    'Isreal',
+    'Israel',
     'New Zealand',
     'Singapore',
+]
+
+const GenderOptions = [
+    '#id_gender1',
+    '#id_gender2',
 ]
 
 const firstName = faker.person.firstName();
 const lastName = faker.person.lastName();
 const emailUsername = faker.internet.username({firstName, lastName}).toLowerCase();
 const randomCountry = CountryOptions[Math.floor(Math.random() * CountryOptions.length)];  
+const randomGender = GenderOptions[Math.floor(Math.random() * GenderOptions.length)];
 
 export const testData = {
  
@@ -21,7 +27,7 @@ export const testData = {
     firstName: firstName,
     lastName: lastName,
     email: `${emailUsername}@qa-test.com`,
-    genderSelector: '#id_gender1',
+    genderSelector: randomGender,
     password: 'test1234!',
     day: faker.number.int({ min: 1, max: 31 }).toString(),
     month: faker.date.month(),
