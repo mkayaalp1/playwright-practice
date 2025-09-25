@@ -19,7 +19,7 @@ await this.page.goto('https://automationexercise.com');
 
 async clickSignupLogin() {
 //click on signup/Login button
-await this.page.getByRole('link', { name: ' Signup / Login' }).click();
+await this.page.getByRole('link', { name: 'Signup / Login' }).click();
 await this.page.locator('.login-form input[data-qa="login-email"]').fill(email);
 await this.page.locator('.login-form input[data-qa="login-password"]').fill(password);
 await this.page.locator('.login-form button[data-qa="login-button"]').click();

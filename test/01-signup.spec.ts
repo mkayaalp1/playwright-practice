@@ -1,6 +1,6 @@
 import { test} from '@playwright/test';
-import { RegistrationPage } from '../pages/RegistrationPage.ts';
-import { testData } from '../data/testData.ts';
+import { RegistrationPage } from '../pages/RegistrationPage';
+import { testData } from '../data/testData';
 import fs from 'fs';
 import path from 'path'; 
 
