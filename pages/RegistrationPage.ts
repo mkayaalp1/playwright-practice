@@ -2,21 +2,21 @@ import {Page} from '@playwright/test'
 
 export class RegistrationPage {
   constructor(private page: Page) {
-    this.page = page;
+  this.page = page;
   }
 
  async goToHomePage() { 
-//navigate to the website
-await this.page.goto('https://automationexercise.com');
+  //navigate to the website
+  await this.page.goto('https://automationexercise.com');
  }
 
-async clickSignupLogin() {
-//click on signup/Login button
-await this.page.getByRole('link', { name: ' Signup / Login' }).click();
+  async clickSignupLogin() {
+  //click on signup/Login button
+  await this.page.getByRole('link', { name: ' Signup / Login' }).click();
 }
 
-async fillRegistrationForm(user: any) {
-//Enter user's name and email
+  async fillRegistrationForm(user: any) {
+  //Enter user's name and email
   await this.page.getByRole('textbox', { name: 'Name' }).click();
   await this.page.getByRole('textbox', { name: 'Name' }).fill(user.name);
   await this.page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').click();
@@ -36,7 +36,6 @@ async fillRegistrationForm(user: any) {
   await this.page.locator('#days').selectOption(user.day);
   await this.page.locator('#months').selectOption(user.month);
   await this.page.locator('#years').selectOption(user.year);
-  await this.page.screenshot({ path: 'test screenshots/userDOB.png' });
 
   //Check the newsletter checkbox
   await this.page.getByRole('checkbox', { name: 'Sign up for our newsletter!' }).check();

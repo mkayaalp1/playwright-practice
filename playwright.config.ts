@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         browserName: 'chromium',
-        headless: false,
+        headless: true,
         viewport: { width: 1280, height: 720 },
         launchOptions: {
           slowMo: useSlowMo ? 500 : 0,

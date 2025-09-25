@@ -8,11 +8,11 @@ const userData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 const { email, password } = userData;
 
 export class LoginPage {
-  constructor(private page: Page) {
-    this.page = page;
-  }
+constructor(private page: Page) {
+this.page = page;
+}
 
- async goToHomePage() { 
+async goToHomePage() { 
 //navigate to the website
 await this.page.goto('https://automationexercise.com');
  }
