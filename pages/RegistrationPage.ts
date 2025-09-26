@@ -1,8 +1,8 @@
 import {Page} from '@playwright/test'
+import { testData } from '../data/test-data';
 
 export class RegistrationPage {
   constructor(private page: Page) {
-  this.page = page;
   }
 
  async goToHomePage() { 
@@ -14,8 +14,13 @@ export class RegistrationPage {
   //click on signup/Login button
   await this.page.getByRole('link', { name: ' Signup / Login' }).click();
 }
+ /**
+  *   @param overrides - Optional fields to override default user data
+  */
 
-  async fillRegistrationForm(user: any) {
+  async fillRegistrationForm(overrides: Partial<typeof testData> = {}) {
+  const user = { ...testData, ...overrides };
+  
   //Enter user's name and email
   await this.page.getByRole('textbox', { name: 'Name' }).click();
   await this.page.getByRole('textbox', { name: 'Name' }).fill(user.name);

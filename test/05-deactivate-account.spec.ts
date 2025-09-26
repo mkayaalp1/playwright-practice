@@ -1,18 +1,30 @@
-import { test} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import fs from 'fs';
-import path from 'path';
+
+/**
+ * @test A user can successfully deactivate their account.
+ * This test verifies that a logged-in user can delete their account
+ * and confirms that the account deletion was successful.
+ */
 
 test('A user can successfully delete their account', async ({ page }) => {
 
-  // Use login page
+  // Initiate the login page object
   const loginPage = new LoginPage(page);
-  await loginPage.goToHomePage();
-  await loginPage.clickSignupLogin();
 
-  // Continue and delete account
+  // Navigate to home page
+  await loginPage.goToHomePage();
+
+  // Perform login with stored credentials
+  await loginPage.login();
+
+  // Continue to delete account
   await page.getByRole('link', { name: 'Delete Account' }).click();
-  await page.getByText('Account Deleted!').click();
-  await page.screenshot({ path: 'test screenshots/account-deactivated.png' });
+
+  // Assertion: Verify account deletion success
+  await expect(page.getByText('Account Deleted!')).toBeVisible();
+
+  // Take a screenshot after verifying successfully deactivating account
+  await page.screenshot({ path: 'test-screenshots/account-deactivated.png' });
 
 });
