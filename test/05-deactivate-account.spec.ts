@@ -1,3 +1,4 @@
+import '../test-setup';
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
@@ -19,7 +20,10 @@ test('A user can successfully delete their account', async ({ page }) => {
   await loginPage.login();
 
   // Continue to delete account
-  await page.getByRole('link', { name: 'Delete Account' }).click();
+  const deleteAccountButton = page.getByRole('link', { name: 'Delete Account' });
+  await deleteAccountButton.waitFor({ state: 'visible' });
+  await deleteAccountButton.scrollIntoViewIfNeeded();
+  await deleteAccountButton.click();
 
   // Assertion: Verify account deletion success
   await expect(page.getByText('Account Deleted!')).toBeVisible();

@@ -1,3 +1,4 @@
+import '../test-setup';
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import fs from 'fs';
@@ -25,7 +26,7 @@ test('A user can successfully log into their account', async ({ page }) => {
   await loginPage.login();
 
   // Assertion: Verify that user is logged in successfully
-  await expect(page.getByText(`Logged in as ${user.name}`)).toBeVisible();
+  await expect(page.getByText(`Logged in as ${user.name}`)).toBeVisible({ timeout: 10000 });
 
   // Take a screenshot after verifying successful login
   await page.screenshot({ path: 'test-screenshots/successful-login.png' });

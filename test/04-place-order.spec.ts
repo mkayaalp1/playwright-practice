@@ -1,3 +1,4 @@
+import '../test-setup';
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import fs from 'fs';
@@ -58,7 +59,12 @@ test('A user can successfully place an order', async ({ page }) => {
   // Review cart and proceed to checkout
   await page.getByRole('link', { name: 'View Cart' }).click();
   await page.getByText('Proceed To Checkout').click();
-  await page.getByText('Place Order').click();
+
+  // Verify place order button is visible and click it
+  const placeOrderButton = page.getByText('Place Order');
+  await placeOrderButton.waitFor({ state: 'visible' });
+  await placeOrderButton.scrollIntoViewIfNeeded();
+  await placeOrderButton.click();
 
   // Enter payment details and confirm order
   await page.locator('input[name="name_on_card"]').fill(user.name);

@@ -1,3 +1,4 @@
+import '../test-setup';
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import fs from 'fs';

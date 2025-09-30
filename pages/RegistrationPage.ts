@@ -1,4 +1,5 @@
-import {Page} from '@playwright/test'
+import { Page, Locator } from '@playwright/test';
+import { safeClick, safeFill, safeSelect, safeCheck } from '../utils/helpers';
 import { testData } from '../data/test-data';
 
 export class RegistrationPage {
@@ -12,7 +13,7 @@ export class RegistrationPage {
 
   async clickSignupLogin() {
   //click on signup/Login button
-  await this.page.getByRole('link', { name: ' Signup / Login' }).click();
+  await safeClick(this.page.getByRole('link', { name: 'Signup / Login' }));
 }
  /**
   *   @param overrides - Optional fields to override default user data
@@ -20,52 +21,42 @@ export class RegistrationPage {
 
   async fillRegistrationForm(overrides: Partial<typeof testData> = {}) {
   const user = { ...testData, ...overrides };
-  
+
   //Enter user's name and email
-  await this.page.getByRole('textbox', { name: 'Name' }).click();
-  await this.page.getByRole('textbox', { name: 'Name' }).fill(user.name);
-  await this.page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').click();
-  await this.page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address').fill(user.email);
+  await safeFill(this.page.getByRole('textbox', { name: 'Name' }), user.name);
+  await safeFill(this.page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address'), user.email);
 
   //Click on Signup button
-  await this.page.getByRole('button', { name: 'Signup' }).click();
+  await safeClick(this.page.getByRole('button', { name: 'Signup' }));
 
   //Toggle radio button for title
-  await this.page.locator(user.genderSelector).check();
+  await safeCheck(this.page.locator(user.genderSelector));
 
   //Enter password
-  await this.page.getByRole('textbox', { name: 'Password *' }).click();
-  await this.page.getByRole('textbox', { name: 'Password *' }).fill(user.password);
+  await safeFill(this.page.getByRole('textbox', { name: 'Password' }), user.password);
 
   //Enter date of birth
-  await this.page.locator('#days').selectOption(user.day);
-  await this.page.locator('#months').selectOption(user.month);
-  await this.page.locator('#years').selectOption(user.year);
+  await safeSelect(this.page.locator('#days'), user.day);
+  await safeSelect(this.page.locator('#months'), user.month);
+  await safeSelect(this.page.locator('#years'), user.year);
 
-  //Check the newsletter checkbox
-  await this.page.getByRole('checkbox', { name: 'Sign up for our newsletter!' }).check();
+  //Check the newsletter and special offers checkboxs
+  await safeCheck(this.page.getByLabel('Sign up for our newsletter!'));
+  await safeCheck(this.page.getByLabel('Receive special offers from our partners!'));
 
   //Enter user's name
-  await this.page.getByRole('textbox', { name: 'First name *' }).click();
-  await this.page.getByRole('textbox', { name: 'First name *' }).fill(user.firstName);
-  await this.page.getByRole('textbox', { name: 'Last name *' }).click();
-  await this.page.getByRole('textbox', { name: 'Last name *' }).fill(user.lastName);
+  await safeFill(this.page.getByRole('textbox', { name: 'First name' }), user.firstName);
+  await safeFill(this.page.getByRole('textbox', { name: 'Last name' }), user.lastName);
 
   //Enter company name
-  await this.page.getByRole('textbox', { name: 'Company', exact: true }).click();
-  await this.page.getByRole('textbox', { name: 'Company', exact: true }).fill(user.company);
+  await safeFill(this.page.locator('[data-qa="company"]'), user.company);
 
   //Enter address and contact details
-  await this.page.getByRole('textbox', { name: 'Address * (Street address, P.' }).click();
-  await this.page.getByRole('textbox', { name: 'Address * (Street address, P.' }).fill(user.address);
-  await this.page.getByLabel('Country *').selectOption(user.country);
-  await this.page.getByRole('textbox', { name: 'State' }).click();
-  await this.page.getByRole('textbox', { name: 'State' }).fill(user.state);
-  await this.page.getByRole('textbox', { name: 'City * Zipcode *' }).click();
-  await this.page.getByRole('textbox', { name: 'City * Zipcode *' }).fill(user.city);
-  await this.page.locator('#zipcode').click();
-  await this.page.locator('#zipcode').fill(user.zipcode);
-  await this.page.getByRole('textbox', { name: 'Mobile Number' }).click();
-  await this.page.getByRole('textbox', { name: 'Mobile Number' }).fill(user.mobileNumber);
+  await safeFill(this.page.getByRole('textbox', {  name: 'Address * (Street address, P.O. Box, Company name, etc.)' }), user.address);
+  await this.page.getByLabel('Country').selectOption(user.country);
+  await safeFill(this.page.getByRole('textbox', { name: /State/i }), user.state);
+  await safeFill(this.page.getByRole('textbox', { name: /City/i }), user.city);
+  await safeFill(this.page.locator('[data-qa="zipcode"]'), user.zipcode);
+  await safeFill(this.page.locator('[data-qa="mobile_number"]'), user.mobileNumber);
 }
 }

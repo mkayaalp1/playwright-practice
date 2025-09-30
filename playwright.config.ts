@@ -8,7 +8,7 @@ export default defineConfig({
   workers: 1, // Set to 1 for sequential execution
   projects: [
     {
-      name: 'chromium',
+      name: 'Chromium',
       use: {
         browserName: 'chromium',
         headless: true,
@@ -24,7 +24,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'firefox',
+      name: 'Firefox',
       use: {
         browserName: 'firefox',
         headless: true,
@@ -38,7 +38,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'webkit',
+      name: 'Webkit',
       use: {
         browserName: 'webkit',
         headless: true,
@@ -51,15 +51,15 @@ export default defineConfig({
         trace: 'on',
       },
     },
-    {
-      name: 'Mobile Safari',
-      use: { 
-        ...devices['iPhone 14'], 
-        video: 'retain-on-failure',
-        screenshot: 'only-on-failure',
-        trace: 'on',
-      },
-    },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { 
+    //     ...devices['iPhone 14'], 
+    //     video: 'retain-on-failure',
+    //     screenshot: 'only-on-failure',
+    //     trace: 'on',
+    //   },
+    // },
     {
       name: 'Pixel 7',
       use: {

@@ -1,4 +1,6 @@
+import '../test-setup';
 import { test, expect } from '@playwright/test';
+import { safeClick } from '../utils/helpers';
 import { RegistrationPage } from '../pages/RegistrationPage';
 import { testData } from '../data/test-data';
 import fs from 'fs';
@@ -25,7 +27,9 @@ test('A user can successfully complete a signup', async ({ page }) => {
   await registrationPage.fillRegistrationForm(testData);
 
   // Submit the signup form
-  await page.getByRole('button', { name: 'Create Account' }).click();
+  await expect(page.getByRole('button', { name: 'Create Account' })).toBeVisible();
+  await page.waitForTimeout(200); // small delay before clicking submit
+  await safeClick(page.getByRole('button', { name: 'Create Account' }));
 
   // Assertion: Verify account creation success
   await expect(page.getByText('Account Created!')).toBeVisible();
